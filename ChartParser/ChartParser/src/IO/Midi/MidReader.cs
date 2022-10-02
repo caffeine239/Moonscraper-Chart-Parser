@@ -179,7 +179,46 @@ namespace MoonscraperChartEditor.Song.IO
                     }
                 }
             }
+            
+            if (File.Exists(directory + "\\song.ini"))
+            {
+                string[] allLines = File.ReadAllLines(directory + "\\song.ini");
+                for (int i = 0; i < allLines.Length; i++)
+                {
+                    string[] words = allLines[i].Split('=');
 
+                    if (words.Length > 1)
+                    {
+                        switch (words[0])
+                        {
+                            case "artist":
+                                song.metaData.artist = words[1];
+                                break;
+                            case "album":
+                                song.metaData.album = words[1];
+                                break;
+                            case "name":
+                                song.metaData.name = words[1];
+                                break;
+                            case "charter":
+                                song.metaData.charter = words[1];
+                                break;
+                            case "genre":
+                                song.metaData.genre = words[1];
+                                break;
+                            case "year":
+                                song.metaData.year = words[1];
+                                break;
+                          //case "preview_start_time":
+                              //song.metaData.previewStart = words[1];
+                              //break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+            }
+            
             return song;
         }
 
